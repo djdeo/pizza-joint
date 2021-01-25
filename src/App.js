@@ -1,24 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Base from "./components/Base";
+import Toppings from "./components/Toppings";
+import Header from "./components/Header";
+import Order from "./components/Order";
+import Home from "./components/Home";
 
 function App() {
+
+  const [pizza, setPizza] = useState({base:'', toppings:[]})
+
+  const addBase =(base) => {
+    setPizza({...pizza, base})
+  }
+
+  const addTopping = (topping) => {
+    let newToppings;
+
+    if(!pizza.toppings.includes(topping)) {
+      newToppings = [...pizza.toppings, topping]
+    } else {
+      newToppings = pizza.toppings.filter(top => top !== topping)
+    }
+    setPizza({...pizza, toppings:newToppings})
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/base">
+            <Base addBase={addBase} pizza={pizza}/>
+          </Route>
+          <Route path="/toppings">
+            <Toppings addTopping={addTopping} pizza={pizza}/>
+          </Route>
+          <Route path="/order">
+            <Order pizza={pizza} />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 }
 
