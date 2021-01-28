@@ -6,13 +6,15 @@ const loaderVariants = {
         y: [0, -30],
         transition: {
             x: {
-                yoyo: Infinity,
-                duration: 0.5
+                repeat : Infinity,
+                duration: 0.5,
+                repeatType:'mirror'
             },
             y: {
-                yoyo: Infinity,
+                repeat : Infinity,
                 duration: 0.25,
-                ease: 'easeOut'
+                ease: 'easeOut',
+                repeatType:'mirror'
             },
         }
     },
@@ -21,7 +23,7 @@ const loaderVariants = {
         x: 0,
         transition: {
             y: {
-                yoyo: Infinity,
+                repeat : Infinity,
                 duration: 0.25,
                 ease: 'easeOut'
             }

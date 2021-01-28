@@ -5,6 +5,7 @@ import Toppings from "./components/Toppings";
 import Header from "./components/Header";
 import Order from "./components/Order";
 import Home from "./components/Home";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
 
@@ -28,22 +29,24 @@ function App() {
   return (
     <>
       <Header />
-      <BrowserRouter>
-        <Switch>
-          <Route path="/base">
-            <Base addBase={addBase} pizza={pizza}/>
-          </Route>
-          <Route path="/toppings">
-            <Toppings addTopping={addTopping} pizza={pizza}/>
-          </Route>
-          <Route path="/order">
-            <Order pizza={pizza} />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <AnimatePresence exitBeforeEnter onExitComplete={()=>{}}>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/base">
+              <Base addBase={addBase} pizza={pizza}/>
+            </Route>
+            <Route path="/toppings">
+              <Toppings addTopping={addTopping} pizza={pizza}/>
+            </Route>
+            <Route path="/order">
+              <Order pizza={pizza} />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </AnimatePresence>
     </>
   );
 }
