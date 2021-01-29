@@ -17,10 +17,11 @@ const Toppings = ({ addTopping, pizza }) => {
       className="toppings container"
       variants={containerVariants}
       initial="hidden"
+      whileHover="hover"
       animate="visible"
       exit="exit"
     >
-      <h3>Step 2: Choose Toppings </h3>
+      <motion.h3 whileHover={{z:200}}>Step 2: Choose Toppings </motion.h3>
       <ul>
         {toppings.map((topping) => {
           let spanClass = pizza.toppings.includes(topping) ? "active" : "";
